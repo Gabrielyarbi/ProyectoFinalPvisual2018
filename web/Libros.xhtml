@@ -161,9 +161,9 @@
                             <p:outputLabel id="lblfechaturn" value="Fecha de turno" for="txtfechaturn" />
                             <p:calendar id="txtfechaturn" value="#{reservaFormBean.reserva.fechaTurno}" pattern="dd-MM-yyyy" mask="true" required="true"
                                         locale="es"/>
-                            <p:outputLabel id="lblcantida" value="Cantidad" for="txtcantida"/>
+                            <p:outputLabel id="lblcantida" value="Cantidad" for="txtcantida" />
                             <p:inputNumber id="txtcantida" value="#{reservaFormBean.detalleReserva.cantidad}" decimalPlaces="0" 
-                                           required="true"/>
+                                           required="true" disabled="true"/>
 
                            
                             <p:commandButton value="Reservar" actionListener="#{reservaFormBean.nuevaReserva()}"

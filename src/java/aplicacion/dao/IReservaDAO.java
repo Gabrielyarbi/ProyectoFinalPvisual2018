@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IReservaDAO {
     public void altaReserva(Reserva reserva);
-    public void modificarReserva(Reserva reserva);
+    public void modificarReserva(DetalleReserva reserva);
     public void nuevoDetalleDeReserva(DetalleReserva detalle);
     public List<DetalleReserva> listarReservas();
 }

@@ -41,8 +41,18 @@ if(reserva!=null){
     }
 
     @Override
-    public void modificarReserva(Reserva reserva) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void modificarReserva(DetalleReserva reserva) {
+    if(reserva!=null){
+    Session session = NewHibernateUtil.getSessionFactory().openSession();
+    session.beginTransaction();
+    session.update(reserva);
+    session.getTransaction().commit();
+    session.close();  
+    
+    }else{FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"Error" ,"Error");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+    }
+ 
     }
 
     @Override

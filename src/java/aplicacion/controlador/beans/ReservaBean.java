@@ -5,13 +5,15 @@
  */
 package aplicacion.controlador.beans;
 
+import aplicacion.dao.imp.ram.PrestamoDAOImp;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import aplicacion.modelo.dominio.Reserva;
 import aplicacion.dao.imp.ram.ReservaDAOImp;
 import aplicacion.modelo.dominio.DetalleReserva;
+import aplicacion.modelo.dominio.DetallePrestamo;
 import java.io.Serializable;
-
+import aplicacion.modelo.dominio.Prestamo;
 
 
 import java.util.List;
@@ -56,5 +58,15 @@ public class ReservaBean implements Serializable {
        ReservaDAOImp reservaDAO=new ReservaDAOImp();
        return reservaDAO.listarReservas();
    } 
-
+public void confirmarReserva (Prestamo p, DetallePrestamo dp){
+    PrestamoDAOImp prestamoDAO=new PrestamoDAOImp();
+    prestamoDAO.altaPrestamo(p);
+    prestamoDAO.altaDetallePrestamo(dp);
 }
+public void modificarReserva(DetalleReserva reserva){
+    ReservaDAOImp reservaD=new ReservaDAOImp();
+    reservaD.modificarReserva(reserva);
+}
+}
+
+

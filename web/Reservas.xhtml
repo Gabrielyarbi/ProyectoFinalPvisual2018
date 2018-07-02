@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -51,8 +52,32 @@
                             <p:outputLabel value="#{reservaFormBean.reservaSeleccionada.reserva.perfil.apellido}"/>
                             <p:outputLabel value="Titulo :"/>
                             <p:outputLabel value="#{reservaFormBean.reservaSeleccionada.publicacion.nombre}"/>
-                            <p:commandButton value="Confirmar" />
+                            <p:commandButton value="Confirmar" actionListener="#{reservaFormBean.mostrarDialogo2()}" 
+                                             update="frmD"/>
                         </h:panelGrid>
+                        <p:panel header="Prestamo" visible="#{reservaFormBean.dialogo2}">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="Nombre : "/>
+                                <p:outputLabel value="#{reservaFormBean.reservaSeleccionada.reserva.perfil.nombre}"/>
+                                <p:outputLabel value="Apellido : "/>
+                                <p:outputLabel value="#{reservaFormBean.reservaSeleccionada.reserva.perfil.apellido}"/>
+                                <p:outputLabel value="Administrador : "/>
+                                <p:outputLabel value="#{loginFormBean.perfil.usuario.nombreUsuario}"/>
+                                
+                                <p:outputLabel value="Fecha de emision : "/>
+                                <p:outputLabel value="#{reservaFormBean.reservaSeleccionada.reserva.fechaEmision}"/>
+                                <p:outputLabel value="Turno de entrega : "/>
+                                <p:selectOneMenu value="#{reservaFormBean.turno}">
+                                    <f:selectItem itemLabel="Mañana" itemValue="Mañana"/>
+                                    <f:selectItem itemLabel="Tarde" itemValue="Tarde"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Fecha de Entrega : "/>
+                                <p:outputLabel value="#{reservaFormBean.fechaAdevolver}"/>
+                                <p:commandButton value="Confirmar Prestamo" 
+                                                 actionListener="#{reservaFormBean.confirmarReserva()}" 
+                                                 update="frmD,frmreservas"/>
+                           </h:panelGrid>
+                        </p:panel>
                     </p:dialog>
                 </h:form>
             </ui:define>

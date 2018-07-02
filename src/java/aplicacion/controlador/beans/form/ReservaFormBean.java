@@ -6,8 +6,10 @@
 package aplicacion.controlador.beans.form;
 
 import aplicacion.controlador.beans.ReservaBean;
+import aplicacion.modelo.dominio.DetallePrestamo;
 import aplicacion.modelo.dominio.DetalleReserva;
 import aplicacion.modelo.dominio.Perfil;
+import aplicacion.modelo.dominio.Prestamo;
 import aplicacion.modelo.dominio.PubAut;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -37,17 +39,26 @@ public class ReservaFormBean implements Serializable {
     private DetalleReserva detalleReserva;
     private boolean dialogo;
     private Publicacion publicacionSeleccionada;
-
+    private boolean dialogo2;
     private List<DetalleReserva> reservas;
     private DetalleReserva reservaSeleccionada;
+    private DetalleReserva reservaPrestamo;
+    private Prestamo prestamo;
+    private DetallePrestamo dPrestamo;
+    private String turno;
+    private Date fechaAdevolver;
     /**
      * Creates a new instance of ReservaFormBean
      */
     public ReservaFormBean() {
         publicacionSeleccionada = new Publicacion();
         reserva = new Reserva(new Date(), true);
-        detalleReserva = new DetalleReserva();
+        detalleReserva = new DetalleReserva(1);
         reservaSeleccionada=new DetalleReserva();
+       
+        fechaAdevolver=new Date();
+        prestamo = new Prestamo(new Date(), true);
+        dPrestamo=new DetallePrestamo();
     }
 
     public ReservaBean getReservaBean() {
@@ -98,6 +109,46 @@ public class ReservaFormBean implements Serializable {
         this.reservaSeleccionada = reservaSeleccionada;
     }
 
+    public Prestamo getPrestamo() {
+        return prestamo;
+    }
+
+    public void setPrestamo(Prestamo prestamo) {
+        this.prestamo = prestamo;
+    }
+
+    public DetallePrestamo getdPrestamo() {
+        return dPrestamo;
+    }
+
+    public void setdPrestamo(DetallePrestamo dPrestamo) {
+        this.dPrestamo = dPrestamo;
+    }
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    public Date getFechaAdevolver() {
+        return fechaAdevolver;
+    }
+
+    public void setFechaAdevolcer(Date fechaAdevolcer) {
+        this.fechaAdevolver = fechaAdevolcer;
+    }
+
+    public boolean isDialogo2() {
+        return dialogo2;
+    }
+
+    public void setDialogo2(boolean dialogo2) {
+        this.dialogo2 = dialogo2;
+    }
+
     public void seleccionarPublicacion(PubAut p) {
         this.publicacionSeleccionada = p.getPublicacion();
         mostrarDialogo();
@@ -111,6 +162,14 @@ public class ReservaFormBean implements Serializable {
 
     public void setReservas(List<DetalleReserva> reservas) {
         this.reservas = reservas;
+    }
+
+    public DetalleReserva getReservaPrestamo() {
+        return reservaPrestamo;
+    }
+
+    public void setReservaPrestamo(DetalleReserva reservaPrestamo) {
+        this.reservaPrestamo = reservaPrestamo;
     }
 
     
@@ -127,7 +186,7 @@ public class ReservaFormBean implements Serializable {
         publicacionSeleccionada = new Publicacion();
         reserva = new Reserva(new Date(), true);
         detalleReserva = new DetalleReserva();
-
+        
     }
 
     public void mostrarDialogo() {
@@ -136,6 +195,14 @@ public class ReservaFormBean implements Serializable {
 
     public void ocultarDialogo() {
         this.dialogo = false;
+    }
+    
+    public void mostrarDialogo2() {
+        this.dialogo2 = true;
+    }
+
+    public void ocultarDialogo2() {
+        this.dialogo2 = false;
     }
      public void listarReservas(){
          this.reservas=reservaBean.listarReservas();
@@ -148,4 +215,44 @@ public class ReservaFormBean implements Serializable {
          this.reservaSeleccionada=r;
          mostrarDialogo();
      }
+     public void confirmarReserva(){
+        Perfil admin=(Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfil"); 
+        this.prestamo.setPerfil(this.reservaSeleccionada.getReserva().getPerfil());
+        this.prestamo.setAdministrativo(admin.getNombre());
+        this.dPrestamo.setPrestamo(prestamo);
+        this.dPrestamo.setEstado(true);
+        this.dPrestamo.setPublicacion(this.reservaSeleccionada.getPublicacion());
+        this.dPrestamo.setFechaADevolver(fechaAdevolver);
+        
+        this.dPrestamo.setTurno(turno);
+        this.dPrestamo.setFechaDevolucion(new Date());
+        reservaBean.confirmarReserva(prestamo, dPrestamo);
+        this.reservaSeleccionada.setEstado(false);
+        reservaBean.modificarReserva(this.reservaSeleccionada);
+        ocultarDialogo();
+        init();
+     }
+      /* public void altaDePrestamo(){
+        
+    
+        Perfil admin=(Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfil");
+        this.prestamo.setPerfil(this.perfil);
+        this.prestamo.setAdministrativo(admin.getNombre());
+        prestamoBean.agregarPrestamo(prestamo);
+        this.dPrestamo.setPrestamo(prestamo);
+        this.publicacion=(Publicacion) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("publicacion");
+        
+        
+        this.dPrestamo.setEstado(true);
+        this.dPrestamo.setPublicacion(publicacion);
+        this.dPrestamo.setFechaADevolver(fechaAdevolver);
+        this.dPrestamo.setTurno(turno);
+        this.dPrestamo.setFechaDevolucion(new Date());
+        prestamoBean.agregarDetallePrestamo(dPrestamo);
+         dPrestamo=new DetallePrestamo();
+      prestamo = new Prestamo(new Date(), true);
+       publicacion=new Publicacion();
+       fechaAdevolver=new Date();
+        ocultarDialogo();
+    }*/
 }

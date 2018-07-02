@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="Proyecto_Final_2018" default="default" basedir=".">
-    <description>Builds, tests, and runs the project Proyecto Final 2018.</description>
+<project name="PVProyectoFinall" default="default" basedir=".">
+    <description>Builds, tests, and runs the project PVProyectoFinall.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 

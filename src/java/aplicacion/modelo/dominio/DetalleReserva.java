@@ -18,6 +18,10 @@ public class DetalleReserva  implements java.io.Serializable {
     public DetalleReserva() {
     }
 
+    public DetalleReserva(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
     public Integer getCodigo() {
         return codigo;
     }
