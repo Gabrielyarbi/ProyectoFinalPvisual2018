@@ -7,10 +7,10 @@
       <column name="dp_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Prestamo" fetch="select" name="prestamo">
+    <many-to-one class="aplicacion.modelo.dominio.Prestamo" fetch="join" name="prestamo" cascade="all">
       <column name="dp_prestamo" not-null="true"/>
     </many-to-one>
-    <many-to-one class="aplicacion.modelo.dominio.Publicacion" fetch="select" name="publicacion">
+    <many-to-one class="aplicacion.modelo.dominio.Publicacion" fetch="join" name="publicacion" cascade="all">
       <column length="15" name="dp_publicacion" not-null="true"/>
     </many-to-one>
     <property name="estado" type="boolean">

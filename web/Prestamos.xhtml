@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./Estructura/MasterTemplate.xhtml">
+
+            <ui:define name="content">
+                 <h:form id="frmPrestamo">
+                      <p:panel header="Prestamo">
+                          <p:dataTable id="tblp" var="prestamo" value="#{prestamoFormBean.prestamos}">
+                            <p:column headerText="Nombre">  
+                                <p:outputLabel value="#{prestamo.prestamo.perfil.nombre}" />
+                            </p:column>
+
+                            <p:column headerText="Apellido">  
+                                <p:outputLabel value="#{prestamo.prestamo.perfil.apellido}" />
+                            </p:column>
+                            
+                           <p:column headerText="Publicaion">  
+                               <p:outputLabel value="#{prestamo.publicacion.nombre}" />
+                            </p:column>
+                           <p:column headerText="Editorial">  
+                               <p:outputLabel value="#{prestamo.publicacion.editorial.nombre}" />
+                            </p:column>
+                           <p:column headerText="Fecha de emision">  
+                               <p:outputLabel value="#{prestamo.prestamo.fechaPrestamo}" />
+                            </p:column>
+                           <p:column headerText="Fecha de turno">  
+                               <p:outputLabel value="#{prestamo.fechaADevolver}" />
+                            </p:column>
+                            <p:column headerText="Confirmar prestamos">  
+                                <p:commandButton value="Modificar" 
+                                                 />
+                            </p:column>
+                             
+                        </p:dataTable>
+                   </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

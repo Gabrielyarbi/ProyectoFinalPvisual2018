@@ -14,6 +14,7 @@ import aplicacion.modelo.dominio.Publicacion;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -190,4 +191,12 @@ public class PrestamoFormBean implements Serializable{
     public void ocultarDialogo(){
         this.dialogo=false;
     }
+    public void listarPrestamos(){
+        this.prestamos=prestamoBean.listarPrestamos();
+    }
+    @PostConstruct
+    public void init(){
+        listarPrestamos();
+    }
 }
+

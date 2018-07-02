@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 import aplicacion.modelo.dominio.Prestamo;
 import aplicacion.modelo.dominio.Perfil;
 import java.io.Serializable;
+import java.util.List;
 /**
  *
  * @author Gabriel.Y
@@ -46,4 +47,8 @@ private Prestamo prestamo;
         PerfilDAOImp PDao= new PerfilDAOImp();
         return PDao.buscarPerfil(dni);
     }
+public List<DetallePrestamo> listarPrestamos(){
+    PrestamoDAOImp prestamoDao =new PrestamoDAOImp();
+    return prestamoDao.listarPrestamos();
+}
 }
