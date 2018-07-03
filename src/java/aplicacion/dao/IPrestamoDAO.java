@@ -17,4 +17,6 @@ public interface IPrestamoDAO {
     public void altaPrestamo(Prestamo p);
     public void altaDetallePrestamo(DetallePrestamo dp);
     public List<DetallePrestamo> listarPrestamos ();
+    public void modificarPrestamo (DetallePrestamo prestamo);
+
 }

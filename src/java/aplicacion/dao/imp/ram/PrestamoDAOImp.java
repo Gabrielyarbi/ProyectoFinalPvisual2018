@@ -70,5 +70,20 @@ public class PrestamoDAOImp implements IPrestamoDAO, Serializable{
         return listaPrestamo;   
     
     }
+
+    @Override
+    public void modificarPrestamo(DetallePrestamo prestamo) {
+
+            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(prestamo);
+            session.getTransaction().commit();
+
+            session.close();
+
+        
+
+    }
     
+
 }

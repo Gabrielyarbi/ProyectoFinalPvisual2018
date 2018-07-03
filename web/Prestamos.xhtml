@@ -34,12 +34,29 @@
                                <p:outputLabel value="#{prestamo.fechaADevolver}" />
                             </p:column>
                             <p:column headerText="Confirmar prestamos">  
-                                <p:commandButton value="Modificar" 
-                                                 />
+                                <p:commandButton value="Confirmar devolucion" 
+                                   actionListener="#{prestamoFormBean.seleccionarPrestamo(prestamo)}" update="frmDial"/>
                             </p:column>
                              
                         </p:dataTable>
                    </p:panel>
+                </h:form>
+                <h:form id="frmDial">
+                    <p:growl id="msj" />
+                    <p:dialog header="Confirmar devolucion" visible="#{prestamoFormBean.dialogo}">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Nombre"/>
+                            <p:outputLabel value="#{prestamoFormBean.prestamoSeleccionado.prestamo.perfil.nombre}"/>
+                            <p:outputLabel value="Apellido"/>
+                            <p:outputLabel value="#{prestamoFormBean.prestamoSeleccionado.prestamo.perfil.apellido}"/>
+                            <p:outputLabel value="Publicacion"/>
+                            <p:outputLabel value="#{prestamoFormBean.prestamoSeleccionado.publicacion.nombre}"/>
+                            <p:outputLabel id="lblfecha" value="Fecha De Devolucion" for="txtfecha"/>
+                            <p:calendar id="txtfecha" value="#{prestamoFormBean.fechaDeDevolucion}" pattern="dd-MM-yyyy" mask="true" required="true" 
+                                        locale="es"/>
+                            <p:commandButton value="Confirmar" actionListener="#{prestamoFormBean.modificarPrestamo()}" update="frmDial,frmPrestamo,msj"/>
+                        </p:panelGrid>    
+                   </p:dialog>
                 </h:form>
             </ui:define>
 

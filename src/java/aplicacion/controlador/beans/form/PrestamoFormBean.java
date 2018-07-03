@@ -41,6 +41,8 @@ public class PrestamoFormBean implements Serializable{
      private Publicacion publicacion;
      private Date fechaAdevolver;
      private String turno;
+     private DetallePrestamo prestamoSeleccionado;
+     private Date fechaDeDevolucion;
     /**
      * Creates a new instance of PrestamoFormBean
      */
@@ -107,10 +109,6 @@ public class PrestamoFormBean implements Serializable{
         this.perfil = perfil;
     }
     
-    public void seleccionarReserva (){
-        
-    }
-
     public boolean isDialogo() {
         return dialogo;
     }
@@ -149,6 +147,22 @@ public class PrestamoFormBean implements Serializable{
 
     public void setTurno(String turno) {
         this.turno = turno;
+    }
+
+    public DetallePrestamo getPrestamoSeleccionado() {
+        return prestamoSeleccionado;
+    }
+
+    public void setPrestamoSeleccionado(DetallePrestamo prestamoSeleccionado) {
+        this.prestamoSeleccionado = prestamoSeleccionado;
+    }
+
+    public Date getFechaDeDevolucion() {
+        return fechaDeDevolucion;
+    }
+
+    public void setFechaDeDevolucion(Date fechaDeDevolucion) {
+        this.fechaDeDevolucion = fechaDeDevolucion;
     }
     
     
@@ -197,6 +211,20 @@ public class PrestamoFormBean implements Serializable{
     @PostConstruct
     public void init(){
         listarPrestamos();
+    }
+    public void seleccionarPrestamo(DetallePrestamo prestamo){
+        this.prestamoSeleccionado=prestamo;
+        mostrarDialogo();
+    }
+    public void modificarPrestamo(){
+        this.prestamoSeleccionado.setFechaDevolucion(fechaDeDevolucion);
+        this.prestamoSeleccionado.setEstado(false);
+        prestamoBean.modificarPrestamo(prestamoSeleccionado);
+        
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmado", "Confirmado");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        ocultarDialogo();
+        init();
     }
 }
 

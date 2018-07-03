@@ -51,4 +51,8 @@ public List<DetallePrestamo> listarPrestamos(){
     PrestamoDAOImp prestamoDao =new PrestamoDAOImp();
     return prestamoDao.listarPrestamos();
 }
+public void modificarPrestamo(DetallePrestamo p){
+    PrestamoDAOImp prestamoDao =new PrestamoDAOImp();
+    prestamoDao.modificarPrestamo(p);
+}
 }
