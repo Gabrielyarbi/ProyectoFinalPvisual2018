@@ -12,27 +12,29 @@
                 <h:form id="frmPub">
                     <p:panel >
                         <p:dataTable id="tblp" var="usuario" value="#{usuarioFormBean.usuariosAdministradores}">
-
+                            <f:facet name="header">
+                                Usuarios Administrativo
+                                <p:commandButton value="Imprimir" icon="ui-icon-print"></p:commandButton>
+                            </f:facet>
                             <p:column headerText="Nombre">  
                                 <p:outputLabel value="#{usuario.nombreUsuario}" />
                             </p:column>
 
-                            <p:column headerText="tipo">  
+                            <p:column headerText="Tipo">  
                                 <p:outputLabel value="#{usuario.tipoUsuario}" />
                             </p:column>
 
-                            <p:column headerText="Editar" >  
-                                <p:commandButton value="Editar Usuario" rendered="#{loginFormBean.renderSuper}"
+                            <p:column headerText="Estado" >  
+                                <p:commandButton value="Editar" icon="ui-icon-pencil" rendered="#{loginFormBean.renderSuper}"
                                                  actionListener="#{usuarioFormBean.seleccionarUsuario(usuario)}" update="frmdialogo,frmPub"/>
                             </p:column>
-
                         </p:dataTable>
                     </p:panel>
                 </h:form>
                 <h:form id="frmdialogo">
                     <p:growl id="msj"/>
-                    <p:dialog id="dialog" header="Editar usuario" visible="#{usuarioFormBean.dialogo}" showEffect="explode" hideEffect="explode" modal="true"
-                              footer="Biblioteca San Francisco-Programacion visual 2018" >
+                    <p:dialog id="dialog" header="Editar Estado" visible="#{usuarioFormBean.dialogo}" showEffect="explode" hideEffect="explode" modal="true"
+                              footer="Biblioteca San Francisco-Programacion Visual 2018" >
                         <h:panelGrid columns="2">
                             <p:outputLabel value="Nombre: "/>
                             <p:outputLabel value="#{usuarioFormBean.usuarioSeleccionado.nombreUsuario}"/>
@@ -42,10 +44,10 @@
                                 <f:selectItem itemLabel="Inactivo" itemValue="false"/>
                             </p:selectOneRadio>
                         </h:panelGrid>
-                        <p:commandButton value="Guardar cambios" actionListener="#{usuarioFormBean.modificarUsuario()}" 
+                        <p:commandButton value="Guardar" icon="ui-icon-circle-check" actionListener="#{usuarioFormBean.modificarUsuario()}" 
                                          update="msj,frmdialogo"/>
                         <p:commandButton value="Cancelar" actionListener="#{usuarioFormBean.ocultarDialogo()}"
-                                         update="frmdialogo"/>
+                                         update="frmdialogo" icon="ui-icon-closethick"/>
                     </p:dialog>
                 </h:form>
             </ui:define>

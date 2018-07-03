@@ -47,7 +47,7 @@
                 </script> 
                 <p:growl id="messages"/>
                 <p:menubar>
-                    <p:menuitem value="home" outcome="Home" />
+                    <p:menuitem value="Inicio" icon="ui-icon-home" outcome="Home" />
                     <p:submenu label="Publicaciones" icon="">
                         <p:menuitem value="Libros y revistas" icon="ui-icon-books" rendered="#{loginFormBean.renderFinal}" outcome="Libros"/>
                         <p:menuitem value="Editar Libros y revistas" icon="ui-icon-books" rendered="#{loginFormBean.renderAdmin}" outcome="Libros"/>
@@ -69,11 +69,11 @@
                         <p:menuitem value="Ver y Editar Editoriales" rendered="#{loginFormBean.renderAdmin}" outcome="Editoriales.xhtml"/>
                     </p:submenu>
 
-                    <p:submenu label="Empleados"  rendered="#{loginFormBean.renderSuper}">
-                        <p:menuitem value="Ver y Editar" outcome="Administradores.xhtml"  />                        
+                    <p:submenu label="Empleados" icon=" ui-icon-person" rendered="#{loginFormBean.renderSuper}">
+                        <p:menuitem value="Ver y Editar" icon="ui-icon-pencil" outcome="Administradores.xhtml"  />                        
                     </p:submenu>
-                    <p:submenu label="Socios"  rendered="#{loginFormBean.renderSuper}">
-                        <p:menuitem value="Ver y Editar"  outcome="Usuarios.xhtml" />                        
+                    <p:submenu label="Socios"  icon=" ui-icon-person" rendered="#{loginFormBean.renderSuper}">
+                        <p:menuitem value="Ver y Editar" icon="ui-icon-pencil" outcome="Usuarios.xhtml" />                        
                     </p:submenu>
                     <f:facet name="options">
                         <h:panelGrid columns="5">
@@ -81,8 +81,8 @@
                             <p:commandButton icon="ui-icon-search" style="margin-right:25px" 
                                              actionListener="#{publicacionFormBean.buscarLibro()}" update="messages" />                           
                             <p:outputLabel value="#{loginFormBean.perfil.usuario.nombreUsuario}" style="margin-right:20px"/>
-                            <p:commandButton value="Perfil" action="Perfiles"  />
-                            <p:commandButton value="salir" icon="ui-icon-extlink" actionListener="#{loginFormBean.cerrarSesion()}" />
+                            <p:commandButton value="Perfil" icon=" ui-icon-person" action="Perfiles"  />
+                            <p:commandButton value="Salir" icon="ui-icon-extlink" actionListener="#{loginFormBean.cerrarSesion()}" />
                         </h:panelGrid>
                     </f:facet>
                 </p:menubar>

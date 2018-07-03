@@ -11,8 +11,21 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import aplicacion.modelo.dominio.Usuario;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
  *
@@ -107,5 +120,25 @@ public class UsuarioFormBean implements Serializable {
 
     public void ocultarDialogo() {
         this.dialogo = false;
+    }
+
+    public void exportarUsuarioPdf(ActionEvent actionEvent) throws JRException, IOException {
+        Map<String, Object> parametros = new HashMap<String, Object>();
+//puedo pasar parametros al report, siempre que el diseño lo soporte
+//parametros.put("usuario", "pepito");
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/repoUsuFinal.jasper"));
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, new JRBeanCollectionDataSource(this.getUsuarios()));
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.addHeader("Content-disposition", "attachment; filename=UsuariosFinales.pdf");
+        ServletOutputStream stream = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+//exportamos a un archivo en disco
+//JasperExportManager.exportReportToPdfFile(jasperPrint, "e:/reportePrendas.pdf");
+//mostrar en visor jasper
+//JasperViewer.viewReport(jasperPrint,false);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
     }
 }

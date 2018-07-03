@@ -9,19 +9,22 @@
         <ui:composition template="./Estructura/MasterTemplate.xhtml">
             <ui:define name="content">
                 <h:form id="frmPub">
-                    <p:panel >
+                    <p:panel >                        
                         <p:dataTable id="tblp" var="usuario" value="#{usuarioFormBean.usuarios}">
-
+                            <f:facet name="header">
+                                Usuarios Finales
+                                <p:commandButton value="Imprimir" ajax="false" actionListener="#{usuarioFormBean.exportarUsuarioPdf(actionEvent)}" icon="ui-icon-print"></p:commandButton>
+                            </f:facet>
                             <p:column headerText="Nombre">  
-                                <p:outputLabel value="#{usuario.nombreUsuario}" />
+                                <p:outputLabel   value="#{usuario.nombreUsuario}" />
                             </p:column>
 
-                            <p:column headerText="tipo">  
+                            <p:column headerText="Tipo">  
                                 <p:outputLabel value="#{usuario.tipoUsuario}" />
                             </p:column>
 
-                            <p:column headerText="Editar" >  
-                                <p:commandButton value="Editar Usuario" rendered="#{loginFormBean.renderAdmin}"
+                            <p:column headerText="Estado" >  
+                                <p:commandButton value="Editar" icon="ui-icon-pencil" rendered="#{loginFormBean.renderAdmin}"
                                                  actionListener="#{usuarioFormBean.seleccionarUsuario(usuario)}" update="frmdialogo,frmPub"/>
                             </p:column>
                         </p:dataTable>
@@ -29,8 +32,9 @@
                 </h:form>
                 <h:form id="frmdialogo">
                     <p:growl id="msj"/>
-                    <p:dialog id="dialog" header="Editar usuario" visible="#{usuarioFormBean.dialogo}"
-                              footer="Biblioteca San Francisco-Programacion visual 2018" showEffect="explode" hideEffect="explode" modal="true" >
+                    <p:dialog id="dialog" header="Editar Estado" visible="#{usuarioFormBean.dialogo}"
+                              footer="Biblioteca San Francisco-Programacion Visual 2018" showEffect="explode"
+                              hideEffect="explode" modal="true" >
                         <h:panelGrid columns="2">
                             <p:outputLabel value="Nombre: "/>
                             <p:outputLabel value="#{usuarioFormBean.usuarioSeleccionado.nombreUsuario}"/>
@@ -40,10 +44,10 @@
                                 <f:selectItem itemLabel="Inactivo" itemValue="false"/>
                             </p:selectOneRadio>
                         </h:panelGrid>
-                        <p:commandButton value="Guardar cambios" actionListener="#{usuarioFormBean.modificarUsuario()}" 
+                        <p:commandButton value="Guardar" icon="ui-icon-circle-check" actionListener="#{usuarioFormBean.modificarUsuario()}" 
                                          update="msj,frmdialogo"/>
                         <p:commandButton value="Cancelar" actionListener="#{usuarioFormBean.ocultarDialogo()}"
-                                         update="frmdialogo"/>
+                                         update="frmdialogo" icon="ui-icon-closethick"/>
                     </p:dialog>
                 </h:form>
             </ui:define>
