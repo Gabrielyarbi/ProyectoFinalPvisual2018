@@ -7,7 +7,11 @@
     <body>
         <ui:composition template="./Estructura/MasterTemplate.xhtml">
             <ui:define name="content">
-                <p:outputLabel value="Bienvenido #{loginFormBean.perfil.nombre} a Biblioteca san Francisco" />         
+                <p:outputLabel value="Bienvenido #{loginFormBean.perfil.nombre} a Biblioteca san Francisco" /> 
+                <p:galleria  value="#{imagenesControlador.images}" var="image" panelWidth="1300" panelHeight="450" showCaption="true">
+                    <p:graphicImage name="image/#{image}" alt="Image Description for #{image}" title="#{image}"/>
+                </p:galleria>
+
             </ui:define> 
         </ui:composition>
     </body>

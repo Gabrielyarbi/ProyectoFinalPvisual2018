@@ -23,6 +23,10 @@
                             <p:column headerText="Resumen">  
                                 <p:outputLabel value="#{pub.publicacion.resumen}" />
                             </p:column>
+                            
+                            <p:column headerText="Clasificacion">  
+                                <p:outputLabel value="#{publicacionFormBean.getClasificacion(pub.publicacion)}" />
+                            </p:column>
 
                             <p:column headerText="Tipo">  
                                 <p:outputLabel value="#{pub.publicacion.tipo}" />
@@ -70,6 +74,13 @@
                                 <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
                             </p:inputText>
                             <p:outputLabel/>
+                            <p:outputLabel value="Clasificacion"/>
+                            <p:selectOneMenu value="#{publicacionFormBean.clasificacion}" converter="omnifaces.SelectItemsConverter">
+                                <f:selectItems  value="#{clasificacionFormBean.listaDeClasificaciones}" var="cla"
+                                                itemLabel="#{cla.descripcion}" itemValue="#{cla}"/>
+                            </p:selectOneMenu>
+                            <p:button value="Nueva clasificacion"  outcome="clasificaciones.xhtml"/>
+                            
                             <p:outputLabel value="Autor"/>
                             <p:selectOneMenu value="#{publicacionFormBean.autor}" converter="omnifaces.SelectItemsConverter">
                                 <f:selectItems  value="#{autorFormBean.autores}" var="autor"

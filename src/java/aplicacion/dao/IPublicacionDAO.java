@@ -5,8 +5,10 @@
  */
 package aplicacion.dao;
 
+import aplicacion.modelo.dominio.Clasificacion;
 import aplicacion.modelo.dominio.PubAut;
 import aplicacion.modelo.dominio.Publicacion;
+import aplicacion.modelo.dominio.PubCla;
 import java.util.List;
 
 /**
@@ -21,5 +23,7 @@ public interface IPublicacionDAO {
     public void modificarPublicacion (Publicacion p);
     public List<Publicacion> buscarLibro (String busqueda);
     public List<PubAut> LibroAprestar (String codigo);
+    public PubCla obtenerClasificacion (Publicacion p);
+ 
     
 }

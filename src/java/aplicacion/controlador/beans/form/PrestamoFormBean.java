@@ -27,30 +27,32 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class PrestamoFormBean implements Serializable{
-     @ManagedProperty(value = "#{prestamoBean}")
+public class PrestamoFormBean implements Serializable {
+
+    @ManagedProperty(value = "#{prestamoBean}")
     private PrestamoBean prestamoBean;
-     private Prestamo prestamo;
-     private DetallePrestamo dPrestamo;
-     private List<DetallePrestamo>prestamos;
-     private DetalleReserva reservaSeleccionada;
-     private String dni;
-     private Perfil perfil;
-     private boolean dialogo=false;
-     private boolean dialogo2=false;
-     private Publicacion publicacion;
-     private Date fechaAdevolver;
-     private String turno;
-     private DetallePrestamo prestamoSeleccionado;
-     private Date fechaDeDevolucion;
+    private Prestamo prestamo;
+    private DetallePrestamo dPrestamo;
+    private List<DetallePrestamo> prestamos;
+    private DetalleReserva reservaSeleccionada;
+    private String dni;
+    private Perfil perfil;
+    private boolean dialogo = false;
+    private boolean dialogo2 = false;
+    private Publicacion publicacion;
+    private Date fechaAdevolver;
+    private String turno;
+    private DetallePrestamo prestamoSeleccionado;
+    private Date fechaDeDevolucion;
+
     /**
      * Creates a new instance of PrestamoFormBean
      */
     public PrestamoFormBean() {
-        dPrestamo=new DetallePrestamo();
-      prestamo = new Prestamo(new Date(), true);
-       publicacion=new Publicacion();
-       fechaAdevolver=new Date();
+        dPrestamo = new DetallePrestamo();
+        prestamo = new Prestamo(new Date(), true);
+        publicacion = new Publicacion();
+        fechaAdevolver = new Date();
     }
 
     public PrestamoBean getPrestamoBean() {
@@ -108,7 +110,7 @@ public class PrestamoFormBean implements Serializable{
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
-    
+
     public boolean isDialogo() {
         return dialogo;
     }
@@ -164,67 +166,69 @@ public class PrestamoFormBean implements Serializable{
     public void setFechaDeDevolucion(Date fechaDeDevolucion) {
         this.fechaDeDevolucion = fechaDeDevolucion;
     }
-    
-    
-    public void buscarPerfilAprestar(){
-       this.perfil= prestamoBean.buscarPerfilDeUsuarioAprestar(this.dni);
-       if(perfil==null){
-       FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se encotro coincidencias", "No se encotro coincidencias");
+
+    public void buscarPerfilAprestar() {
+        this.perfil = prestamoBean.buscarPerfilDeUsuarioAprestar(this.dni);
+        if (perfil == null) {
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se encotro coincidencias", "No se encotro coincidencias");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-       }else{
-           this.dialogo2=true;
-       }
+        } else {
+            this.dialogo2 = true;
+        }
     }
-    public void altaDePrestamo(){
-        
-    
-        Perfil admin=(Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfil");
+
+    public void altaDePrestamo() {
+
+        Perfil admin = (Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfil");
         this.prestamo.setPerfil(this.perfil);
         this.prestamo.setAdministrativo(admin.getNombre());
         prestamoBean.agregarPrestamo(prestamo);
         this.dPrestamo.setPrestamo(prestamo);
-        this.publicacion=(Publicacion) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("publicacion");
-        
-        
+        this.publicacion = (Publicacion) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("publicacion");
+
         this.dPrestamo.setEstado(true);
         this.dPrestamo.setPublicacion(publicacion);
         this.dPrestamo.setFechaADevolver(fechaAdevolver);
         this.dPrestamo.setTurno(turno);
         this.dPrestamo.setFechaDevolucion(new Date());
         prestamoBean.agregarDetallePrestamo(dPrestamo);
-         dPrestamo=new DetallePrestamo();
-      prestamo = new Prestamo(new Date(), true);
-       publicacion=new Publicacion();
-       fechaAdevolver=new Date();
+        dPrestamo = new DetallePrestamo();
+        prestamo = new Prestamo(new Date(), true);
+        publicacion = new Publicacion();
+        fechaAdevolver = new Date();
         ocultarDialogo();
     }
-    public void mostrarDialogo(){
-        this.dialogo=true;
+
+    public void mostrarDialogo() {
+        this.dialogo = true;
     }
-    
-    public void ocultarDialogo(){
-        this.dialogo=false;
+
+    public void ocultarDialogo() {
+        this.dialogo = false;
     }
-    public void listarPrestamos(){
-        this.prestamos=prestamoBean.listarPrestamos();
+
+    public void listarPrestamos() {
+        this.prestamos = prestamoBean.listarPrestamos();
     }
+
     @PostConstruct
-    public void init(){
+    public void init() {
         listarPrestamos();
     }
-    public void seleccionarPrestamo(DetallePrestamo prestamo){
-        this.prestamoSeleccionado=prestamo;
+
+    public void seleccionarPrestamo(DetallePrestamo prestamo) {
+        this.prestamoSeleccionado = prestamo;
         mostrarDialogo();
     }
-    public void modificarPrestamo(){
+
+    public void modificarPrestamo() {
         this.prestamoSeleccionado.setFechaDevolucion(fechaDeDevolucion);
         this.prestamoSeleccionado.setEstado(false);
         prestamoBean.modificarPrestamo(prestamoSeleccionado);
-        
-            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmado", "Confirmado");
-            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+
+        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmado", "Confirmado");
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         ocultarDialogo();
         init();
     }
 }
-

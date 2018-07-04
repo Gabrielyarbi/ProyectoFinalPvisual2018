@@ -7,8 +7,10 @@ package aplicacion.controlador.beans.form;
 
 import aplicacion.controlador.beans.PublicacionBean;
 import aplicacion.modelo.dominio.Autor;
+import aplicacion.modelo.dominio.Clasificacion;
 import aplicacion.modelo.dominio.Editorial;
 import aplicacion.modelo.dominio.PubAut;
+import aplicacion.modelo.dominio.PubCla;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -41,6 +43,8 @@ public class PublicacionFormBean implements Serializable {
     private String buscar;
     private List<PubAut> publicacionAprestar;
     private String CodigoDePublicacion;
+   
+    private Clasificacion clasificacion;
     
 
     private boolean dialogo = false;
@@ -55,6 +59,7 @@ public class PublicacionFormBean implements Serializable {
         publicacionAutor = new PubAut();
         libroSeleccionado = new Publicacion();
         librosEncontrados = new ArrayList<>();
+    
     }
 
     public PublicacionBean getPublicacionBean() {
@@ -153,6 +158,16 @@ public class PublicacionFormBean implements Serializable {
         this.CodigoDePublicacion = CodigoDePublicacion;
     }
 
+
+    public Clasificacion getClasificacion() {
+        return clasificacion;
+    }
+
+    public void setClasificacion(Clasificacion clasificacion) {
+        this.clasificacion = clasificacion;
+    }
+    
+
     public void listarLibros() {
 
         this.publicaciones = publicacionBean.obtenerPublicaciones();
@@ -163,7 +178,6 @@ public class PublicacionFormBean implements Serializable {
 
         listarLibros();
         this.librosEncontrados = (List<Publicacion>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("libros");
-
     }
 
     public void altaDePublicacion() {
@@ -230,4 +244,9 @@ public class PublicacionFormBean implements Serializable {
       mostrarDialogo();
     }
 }
+ public String getClasificacion (Publicacion p){
+    
+     String cla = publicacionBean.obtenerClasificacion(p).getClasificacion().getDescripcion();
+     return cla;
+ }
 }

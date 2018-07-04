@@ -11,8 +11,10 @@ import aplicacion.modelo.dominio.Publicacion;
 import java.util.List;
 
 import aplicacion.dao.imp.ram.PublicacionDAOImp;
+import aplicacion.modelo.dominio.Clasificacion;
 import java.io.Serializable;
 import aplicacion.modelo.dominio.PubAut;
+import aplicacion.modelo.dominio.PubCla;
 
 /**
  *
@@ -69,4 +71,9 @@ public List<PubAut> buscarPublicacionAprestar(String codigo){
     PublicacionDAOImp pubDAO=new PublicacionDAOImp();
     return pubDAO.LibroAprestar(codigo);
 }
+public PubCla obtenerClasificacion (Publicacion pub){
+    PublicacionDAOImp pubDAO=new PublicacionDAOImp();
+    return pubDAO.obtenerClasificacion(pub);
+}
+
 }

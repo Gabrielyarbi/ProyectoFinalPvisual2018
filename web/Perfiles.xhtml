@@ -27,7 +27,7 @@
                             </h:outputText>                        
                             <p:outputLabel value=" Fecha de nacimiento: "/>
                             <h:outputText value="#{loginFormBean.perfil.fechaNac}">
-                                <f:convertDateTime pattern="MM-dd-yyyy" />
+                                <f:convertDateTime pattern="dd-MM-yyyy" />
                             </h:outputText>
                             <p:outputLabel value="Email : "/>
                             <h:outputText value="#{loginFormBean.perfil.email}">
@@ -37,7 +37,7 @@
                             </h:outputText> 
 
                         </h:panelGrid> 
-                        <p:commandButton value="Editar perfil" actionListener="#{modificacionFormBean.mostrarDialogo()}" update="frmdialogo" />
+                        <p:commandButton value="Editar perfil" actionListener="#{modificacionFormBean.seleccionarPerfil()}" update="frmdialogo" />
                     </p:panel>
                    
                 </h:form>
@@ -48,32 +48,32 @@
                               footer="Biblioteca San Francisco-Programacion visual 2018" showEffect="explode" hideEffect="explode" modal="true">
                         <h:panelGrid columns="2">
                             <p:outputLabel id="lblnombre" value="Nombre" for="txtnombre"/>
-                            <p:inputText id="txtnombre" value="#{loginFormBean.perfil.nombre}"
+                            <p:inputText id="txtnombre" value="#{modificacionFormBean.perfil.nombre}"
                                          required="true" validatorMessage="Nombre incorrecto">
                                 <f:validateLength maximum="12" />
                                 <f:validateRegex pattern="^[a-zA-Z ]+$"/>
                             </p:inputText>
                             <p:outputLabel id="lblapellido" value="Apellido" for="txtapellido"/>
-                            <p:inputText id="txtapellido" value="#{loginFormBean.perfil.apellido}" validatorMessage="Apellido incorrecto"
+                            <p:inputText id="txtapellido" value="#{modificacionFormBean.perfil.apellido}" validatorMessage="Apellido incorrecto"
                                          required="true">
                                 <f:validateRegex pattern="^[a-zA-Z ]+$"/>
                             </p:inputText>
                             <p:outputLabel id="lblemail" value="E-Mail" for="txtemail"/>
-                            <p:inputText id="txtemail" value="#{loginFormBean.perfil.email}" validatorMessage="Correo incorrecto" required="true">
+                            <p:inputText id="txtemail" value="#{modificacionFormBean.perfil.email}" validatorMessage="Correo incorrecto" required="true">
                                 <f:validateRegex  pattern="[--_a-z]+@[a-zA-Z]+.com"/> 
                             </p:inputText>
                             <p:outputLabel id="lbldireccion" value="Direccion" for="txtdireccion"/>
-                            <p:inputText id="txtdireccion" value="#{loginFormBean.perfil.direccion}" validatorMessage="Direccion incorrecta" required="true">
+                            <p:inputText id="txtdireccion" value="#{modificacionFormBean.perfil.direccion}" validatorMessage="Direccion incorrecta" required="true">
                                 <f:validateRegex pattern="^[a-zA-Z0-9 ]+$"/>
                                 <f:validateLength maximum="25"/>
                             </p:inputText>
                             <p:outputLabel id="lbltelefono" value="Telefono" for="txttelefono"/>
-                            <p:inputText id="txttelefono" value="#{loginFormBean.perfil.telefono}" validatorMessage="Telefono incorrecto" required="true">
+                            <p:inputText id="txttelefono" value="#{modificacionFormBean.perfil.telefono}" validatorMessage="Telefono incorrecto" required="true">
                                 <f:validateRegex  pattern="[0-9]+$" />
                             </p:inputText>
                             <p:outputLabel id="lblfecha" value="Fecha" for="txtfecha"/>
-                            <p:calendar id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" size="10"
-                                        maxlength="10" pattern="dd-MM-YYYY"
+                            <p:calendar id="txtfecha" value="#{modificacionFormBean.perfil.fechaNac}" 
+                                         pattern="dd-MM-yyyy"
                                         mask="true" required="true"
                                         locale="es"/>
 

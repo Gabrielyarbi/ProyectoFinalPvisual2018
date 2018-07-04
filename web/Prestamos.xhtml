@@ -30,8 +30,11 @@
                            <p:column headerText="Fecha de emision">  
                                <p:outputLabel value="#{prestamo.prestamo.fechaPrestamo}" />
                             </p:column>
-                           <p:column headerText="Fecha de turno">  
+                           <p:column headerText="Fecha a devolver">  
                                <p:outputLabel value="#{prestamo.fechaADevolver}" />
+                            </p:column>
+                           <p:column headerText="Fecha de devolucion">  
+                               <p:outputLabel value="---" />
                             </p:column>
                             <p:column headerText="Confirmar prestamos">  
                                 <p:commandButton value="Confirmar devolucion" 

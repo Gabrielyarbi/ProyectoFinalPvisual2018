@@ -15,8 +15,10 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import aplicacion.dao.IPublicacionDAO;
+import aplicacion.modelo.dominio.Clasificacion;
 import aplicacion.modelo.dominio.Editorial;
 import aplicacion.modelo.dominio.PubAut;
+import aplicacion.modelo.dominio.PubCla;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -136,7 +138,20 @@ listaEncontrada.clear();
         return PublicacionAprestar;
     }
 
-  
-}
-    
+    @Override
+    public PubCla obtenerClasificacion(Publicacion p) {
+        PubCla cla = new PubCla();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        Criteria c =session.createCriteria(PubCla.class).add(Restrictions.like("publicacion", p));
+        if(!c.list().isEmpty()){
+        cla = (PubCla)c.list().get(0);
+    }
+        session.flush();//actuliseme ese opjeto de la base de dato
+        session.close();
+        return cla;
+    }
 
+ 
+}

@@ -3,17 +3,17 @@
 <!-- Generated 10/06/2018 19:00:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
   <class catalog="convento" name="aplicacion.modelo.dominio.PubCla" optimistic-lock="version" table="pub_cla">
-    <id name="pcCodigo" type="java.lang.Integer">
+    <id name="codigo" type="java.lang.Integer">
       <column name="pc_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Clasificaciones" fetch="select" name="clasificaciones">
+    <many-to-one class="aplicacion.modelo.dominio.Clasificacion" fetch="join" name="clasificacion" cascade="all">
       <column name="pc_clasificacion" not-null="true"/>
     </many-to-one>
-    <many-to-one class="aplicacion.modelo.dominio.Publicacion" fetch="select" name="publicaciones">
+    <many-to-one class="aplicacion.modelo.dominio.Publicacion" fetch="join" name="publicacion" cascade="all">
       <column length="15" name="pc_publicacion" not-null="true"/>
     </many-to-one>
-    <property name="pcEstado" type="boolean">
+    <property name="estado" type="boolean">
       <column name="pc_estado" not-null="true"/>
     </property>
   </class>

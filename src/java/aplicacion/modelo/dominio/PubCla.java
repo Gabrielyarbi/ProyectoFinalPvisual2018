@@ -9,49 +9,45 @@ package aplicacion.modelo.dominio;
 public class PubCla  implements java.io.Serializable {
 
 
-     private Integer pcCodigo;
-     private Clasificaciones clasificaciones;
-     private Publicacion publicaciones;
-     private boolean pcEstado;
+     private Integer codigo;
+     private Clasificacion clasificacion;
+     private Publicacion publicacion;
+     private boolean estado;
 
     public PubCla() {
     }
 
-    public PubCla(Clasificaciones clasificaciones, Publicacion publicaciones, boolean pcEstado) {
-       this.clasificaciones = clasificaciones;
-       this.publicaciones = publicaciones;
-       this.pcEstado = pcEstado;
-    }
-   
-    public Integer getPcCodigo() {
-        return this.pcCodigo;
-    }
-    
-    public void setPcCodigo(Integer pcCodigo) {
-        this.pcCodigo = pcCodigo;
-    }
-    public Clasificaciones getClasificaciones() {
-        return this.clasificaciones;
-    }
-    
-    public void setClasificaciones(Clasificaciones clasificaciones) {
-        this.clasificaciones = clasificaciones;
-    }
-    public Publicacion getPublicaciones() {
-        return this.publicaciones;
-    }
-    
-    public void setPublicaciones(Publicacion publicaciones) {
-        this.publicaciones = publicaciones;
-    }
-    public boolean isPcEstado() {
-        return this.pcEstado;
-    }
-    
-    public void setPcEstado(boolean pcEstado) {
-        this.pcEstado = pcEstado;
+    public Integer getCodigo() {
+        return codigo;
     }
 
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public Clasificacion getClasificacion() {
+        return clasificacion;
+    }
+
+    public void setClasificacion(Clasificacion clasificacion) {
+        this.clasificacion = clasificacion;
+    }
+
+    public Publicacion getPublicacion() {
+        return publicacion;
+    }
+
+    public void setPublicacion(Publicacion publicacion) {
+        this.publicacion = publicacion;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
 
 
 

@@ -2,15 +2,15 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 10/06/2018 19:00:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="convento" name="aplicacion.modelo.dominio.Clasificaciones" optimistic-lock="version" table="clasificaciones">
-    <id name="claCodigo" type="java.lang.Integer">
+  <class catalog="convento" name="aplicacion.modelo.dominio.Clasificacion" optimistic-lock="version" table="clasificaciones">
+    <id name="codigo" type="java.lang.Integer">
       <column name="cla_codigo"/>
       <generator class="identity"/>
     </id>
-    <property name="claIdentificador" type="int">
+    <property name="identificador" type="int">
       <column name="cla_identificador" not-null="true" unique="true"/>
     </property>
-    <property name="claDescripcion" type="string">
+    <property name="descripcion" type="string">
       <column length="100" name="cla_descripcion" not-null="true"/>
     </property>
     <set fetch="select" inverse="true" lazy="true" name="pubClas" table="pub_cla">

@@ -24,6 +24,7 @@ public class ModificacionFormBean implements Serializable {
     @ManagedProperty(value = "#{perfilBeans}")
     private PerfilBeans perfilbeans;
     private boolean dialogo = false;
+    private Perfil perfil;
 
     /**
      * Creates a new instance of ModificacionFormBean
@@ -48,12 +49,22 @@ public class ModificacionFormBean implements Serializable {
         this.dialogo = dialogo;
     }
 
-    public void modificarPerfil() {
-        Perfil perfil = (Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfil");
-        perfilbeans.modificarPerfil(perfil);
-        ocultarDialogo();
+    public Perfil getPerfil() {
+        return perfil;
     }
 
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+
+    public void seleccionarPerfil() {
+       this.perfil = (Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfil");
+      mostrarDialogo();
+    }
+public void modificarPerfil (){
+  perfilbeans.modificarPerfil(this.perfil);
+        ocultarDialogo();
+}
     public void mostrarDialogo() {
         this.dialogo = true;
     }
