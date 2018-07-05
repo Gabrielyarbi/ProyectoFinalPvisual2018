@@ -225,7 +225,9 @@ public class PrestamoFormBean implements Serializable {
         this.prestamoSeleccionado.setFechaDevolucion(fechaDeDevolucion);
         this.prestamoSeleccionado.setEstado(false);
         prestamoBean.modificarPrestamo(prestamoSeleccionado);
-
+       Publicacion p= prestamoSeleccionado.getPublicacion();
+       p.setStock(p.getStock()+1);
+       prestamoBean.modificarStock(p);
         FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmado", "Confirmado");
         FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         ocultarDialogo();

@@ -9,6 +9,7 @@ import aplicacion.dao.IClasificacionDAO;
 import aplicacion.datos.hibernate.configuracion.NewHibernateUtil;
 import aplicacion.modelo.dominio.Clasificacion;
 import aplicacion.modelo.dominio.PubCla;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -21,7 +22,7 @@ import org.hibernate.criterion.Order;
  *
  * @author Gabriel.Y
  */
-public class ClasificacionDAOImp implements IClasificacionDAO{
+public class ClasificacionDAOImp implements IClasificacionDAO ,Serializable{
 
     @Override
     public List<Clasificacion> listarClasificaciones() {
@@ -54,6 +55,7 @@ List<Clasificacion> listaClasificaciones= new ArrayList<>();
         session.beginTransaction();
         session.save(Pcla);
         session.getTransaction().commit();
+        session.flush();
         session.close();
     }
     

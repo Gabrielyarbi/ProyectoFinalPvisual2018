@@ -5,6 +5,7 @@
  */
 package aplicacion.controlador.beans;
 
+import aplicacion.dao.imp.ram.ClasificacionDAOImp;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import aplicacion.modelo.dominio.Publicacion;
@@ -75,5 +76,12 @@ public PubCla obtenerClasificacion (Publicacion pub){
     PublicacionDAOImp pubDAO=new PublicacionDAOImp();
     return pubDAO.obtenerClasificacion(pub);
 }
-
+public void altaDeclasificacion(Clasificacion c){
+    ClasificacionDAOImp clasDAO=new ClasificacionDAOImp();
+    clasDAO.agregarClasificacion(c);
+}
+public void altaDePublicaionClasificacion(PubCla pc){
+ClasificacionDAOImp clasDAO=new ClasificacionDAOImp();
+    clasDAO.agregarPubClasificacion(pc);
+}
 }

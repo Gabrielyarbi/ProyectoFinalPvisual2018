@@ -54,6 +54,7 @@ if(p!=null){
     session.beginTransaction();
     session.save(p);
     session.getTransaction().commit();
+    session.flush();
     session.close();
     FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"Agregado con exito" ,"Agregado con exito");
     FacesContext.getCurrentInstance().addMessage(null, facesMessage);

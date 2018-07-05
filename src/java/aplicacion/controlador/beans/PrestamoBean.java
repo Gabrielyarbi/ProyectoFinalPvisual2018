@@ -7,11 +7,13 @@ package aplicacion.controlador.beans;
 
 import aplicacion.dao.imp.ram.PerfilDAOImp;
 import aplicacion.dao.imp.ram.PrestamoDAOImp;
+import aplicacion.dao.imp.ram.PublicacionDAOImp;
 import aplicacion.modelo.dominio.DetallePrestamo;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import aplicacion.modelo.dominio.Prestamo;
 import aplicacion.modelo.dominio.Perfil;
+import aplicacion.modelo.dominio.Publicacion;
 import java.io.Serializable;
 import java.util.List;
 /**
@@ -54,5 +56,9 @@ public List<DetallePrestamo> listarPrestamos(){
 public void modificarPrestamo(DetallePrestamo p){
     PrestamoDAOImp prestamoDao =new PrestamoDAOImp();
     prestamoDao.modificarPrestamo(p);
+}
+public void modificarStock(Publicacion p){
+ PublicacionDAOImp pubDAO=new PublicacionDAOImp();
+    pubDAO.modificarPublicacion(p);
 }
 }

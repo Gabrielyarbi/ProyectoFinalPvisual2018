@@ -5,6 +5,7 @@
  */
 package aplicacion.controlador.beans.form;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -17,7 +18,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class imagenesControlador {
+public class imagenesControlador implements Serializable{
        private List<String> images;
      
     @PostConstruct

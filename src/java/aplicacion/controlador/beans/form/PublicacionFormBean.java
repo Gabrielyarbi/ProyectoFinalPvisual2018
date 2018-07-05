@@ -45,6 +45,7 @@ public class PublicacionFormBean implements Serializable {
     private String CodigoDePublicacion;
    
     private Clasificacion clasificacion;
+    private PubCla clasificacionPub;
     
 
     private boolean dialogo = false;
@@ -59,7 +60,8 @@ public class PublicacionFormBean implements Serializable {
         publicacionAutor = new PubAut();
         libroSeleccionado = new Publicacion();
         librosEncontrados = new ArrayList<>();
-    
+       clasificacion=new Clasificacion();
+    clasificacionPub=new PubCla();
     }
 
     public PublicacionBean getPublicacionBean() {
@@ -166,6 +168,14 @@ public class PublicacionFormBean implements Serializable {
     public void setClasificacion(Clasificacion clasificacion) {
         this.clasificacion = clasificacion;
     }
+
+    public PubCla getClasificacionPub() {
+        return clasificacionPub;
+    }
+
+    public void setClasificacionPub(PubCla clasificacionPub) {
+        this.clasificacionPub = clasificacionPub;
+    }
     
 
     public void listarLibros() {
@@ -181,7 +191,7 @@ public class PublicacionFormBean implements Serializable {
     }
 
     public void altaDePublicacion() {
-        try {
+       // try {
             publicacion.setEditorial(editorial);
             publicacion.setEstado(true);
 
@@ -190,6 +200,10 @@ public class PublicacionFormBean implements Serializable {
             publicacionAutor.setPublicacion(publicacion);
             publicacionAutor.setPaEstado(true);
             publicacionBean.altaDePublicaionAutor(publicacionAutor);
+            this.clasificacionPub.setClasificacion(clasificacion);
+            this.clasificacionPub.setEstado(true);
+            this.clasificacionPub.setPublicacion(publicacion);
+            publicacionBean.altaDePublicaionClasificacion(clasificacionPub);
             init();
             ocultarDialogo();
             autor = new Autor();
@@ -197,12 +211,11 @@ public class PublicacionFormBean implements Serializable {
             publicacion = new Publicacion();
             publicacionAutor = new PubAut();
             libroSeleccionado = new Publicacion();
-        } catch (Exception e) {
+     //   } catch (Exception e) {
             
-                FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Codigo de libro ya existe", "Error Codigo de libro ya existe");
-                FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+             
             
-        }
+        
     }
 
     public void mostrarDialogo() {
@@ -246,7 +259,7 @@ public class PublicacionFormBean implements Serializable {
 }
  public String getClasificacion (Publicacion p){
     
-     String cla = publicacionBean.obtenerClasificacion(p).getClasificacion().getDescripcion();
-     return cla;
+     PubCla cla = publicacionBean.obtenerClasificacion(p);
+     return cla.getClasificacion().getDescripcion();
  }
 }

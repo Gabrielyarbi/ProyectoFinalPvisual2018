@@ -23,10 +23,7 @@
                             <p:column headerText="Resumen">  
                                 <p:outputLabel value="#{pub.publicacion.resumen}" />
                             </p:column>
-                            
-                            <p:column headerText="Clasificacion">  
-                                <p:outputLabel value="#{publicacionFormBean.getClasificacion(pub.publicacion)}" />
-                            </p:column>
+                         
 
                             <p:column headerText="Tipo">  
                                 <p:outputLabel value="#{pub.publicacion.tipo}" />
@@ -45,7 +42,7 @@
                             </p:column>
 
                             <p:column headerText="Reservas" rendered="#{loginFormBean.renderFinal}">  
-                                <p:commandButton value="Reservar Libro" 
+                                <p:commandButton value="Reservar Libro" disabled="#{reservaFormBean.validarStock(pub.publicacion)}"
                                                  actionListener="#{reservaFormBean.seleccionarPublicacion(pub)}" update="frmDialogoReserv"/>
                             </p:column>
                             <p:column headerText="Editar" rendered="#{loginFormBean.renderAdmin}">  
@@ -178,7 +175,7 @@
 
                            
                             <p:commandButton value="Reservar" actionListener="#{reservaFormBean.nuevaReserva()}"
-                                             update="frmDialogoReserv,msj"/>
+                                             update="frmDialogoReserv,msj,frmPub"/>
                         </h:panelGrid>
                     </p:dialog>
                 </h:form>

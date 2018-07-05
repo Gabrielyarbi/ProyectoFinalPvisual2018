@@ -7,6 +7,7 @@ package aplicacion.controlador.beans.form;
 
 import aplicacion.controlador.beans.ClasificacionBean;
 import aplicacion.modelo.dominio.Clasificacion;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -19,7 +20,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class ClasificacionFormBean {
+public class ClasificacionFormBean implements Serializable{
   @ManagedProperty(value = "#{clasificacionBean}")
     private ClasificacionBean clasificacionBean;
     private List<Clasificacion> listaDeClasificaciones;

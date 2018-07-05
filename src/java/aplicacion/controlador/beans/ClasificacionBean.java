@@ -9,6 +9,7 @@ import aplicacion.dao.imp.ram.ClasificacionDAOImp;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import aplicacion.modelo.dominio.Clasificacion;
+import java.io.Serializable;
 import java.util.List;
 /**
  *
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @ManagedBean
 @ViewScoped
-public class ClasificacionBean {
+public class ClasificacionBean implements Serializable{
 private Clasificacion clasificacion;
     /**
      * Creates a new instance of ClasificacionBean

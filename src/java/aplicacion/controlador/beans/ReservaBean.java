@@ -6,6 +6,7 @@
 package aplicacion.controlador.beans;
 
 import aplicacion.dao.imp.ram.PrestamoDAOImp;
+import aplicacion.dao.imp.ram.PublicacionDAOImp;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import aplicacion.modelo.dominio.Reserva;
@@ -14,6 +15,7 @@ import aplicacion.modelo.dominio.DetalleReserva;
 import aplicacion.modelo.dominio.DetallePrestamo;
 import java.io.Serializable;
 import aplicacion.modelo.dominio.Prestamo;
+import aplicacion.modelo.dominio.Publicacion;
 
 
 import java.util.List;
@@ -66,6 +68,10 @@ public void confirmarReserva (Prestamo p, DetallePrestamo dp){
 public void modificarReserva(DetalleReserva reserva){
     ReservaDAOImp reservaD=new ReservaDAOImp();
     reservaD.modificarReserva(reserva);
+}
+public void modificarStock(Publicacion p){
+    PublicacionDAOImp pubDAO=new PublicacionDAOImp();
+    pubDAO.modificarPublicacion(p);
 }
 }
 

@@ -47,6 +47,7 @@ public class ReservaFormBean implements Serializable {
     private DetallePrestamo dPrestamo;
     private String turno;
     private Date fechaAdevolver;
+   
     /**
      * Creates a new instance of ReservaFormBean
      */
@@ -182,7 +183,11 @@ public class ReservaFormBean implements Serializable {
         detalleReserva.setReserva(reserva);
         detalleReserva.setEstado(true);
         reservaBean.altaDeDetalleDeReserva(detalleReserva);
-        ocultarDialogo();
+        publicacionSeleccionada.setStock(publicacionSeleccionada.getStock()-1);
+        reservaBean.modificarStock(publicacionSeleccionada);
+       
+        init();
+         ocultarDialogo();
         publicacionSeleccionada = new Publicacion();
         reserva = new Reserva(new Date(), true);
         detalleReserva = new DetalleReserva();
@@ -232,27 +237,13 @@ public class ReservaFormBean implements Serializable {
         ocultarDialogo();
         init();
      }
-      /* public void altaDePrestamo(){
-        
-    
-        Perfil admin=(Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfil");
-        this.prestamo.setPerfil(this.perfil);
-        this.prestamo.setAdministrativo(admin.getNombre());
-        prestamoBean.agregarPrestamo(prestamo);
-        this.dPrestamo.setPrestamo(prestamo);
-        this.publicacion=(Publicacion) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("publicacion");
-        
-        
-        this.dPrestamo.setEstado(true);
-        this.dPrestamo.setPublicacion(publicacion);
-        this.dPrestamo.setFechaADevolver(fechaAdevolver);
-        this.dPrestamo.setTurno(turno);
-        this.dPrestamo.setFechaDevolucion(new Date());
-        prestamoBean.agregarDetallePrestamo(dPrestamo);
-         dPrestamo=new DetallePrestamo();
-      prestamo = new Prestamo(new Date(), true);
-       publicacion=new Publicacion();
-       fechaAdevolver=new Date();
-        ocultarDialogo();
-    }*/
+     public boolean validarStock(Publicacion p){
+     boolean stock=false;
+         if (p.getStock()== 0){
+     stock=true;
+     }else{
+             stock=false;
+     }
+         return stock;
+     }
 }
