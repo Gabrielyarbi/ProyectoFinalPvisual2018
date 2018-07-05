@@ -37,4 +37,8 @@ private Clasificacion clasificacion;
 ClasificacionDAOImp clasDAO=new ClasificacionDAOImp();
     return clasDAO.listarClasificaciones();
 }
+    public void agregarClasificacion(Clasificacion c){
+    ClasificacionDAOImp clasDAO=new ClasificacionDAOImp();
+    clasDAO.agregarClasificacion(c);
+    }
 }

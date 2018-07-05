@@ -24,10 +24,13 @@ public class ClasificacionFormBean implements Serializable{
   @ManagedProperty(value = "#{clasificacionBean}")
     private ClasificacionBean clasificacionBean;
     private List<Clasificacion> listaDeClasificaciones;
+    private Clasificacion clasificacion;
+    private boolean dialogo=false;
   /**
      * Creates a new instance of ClasificacionFormBean
      */
     public ClasificacionFormBean() {
+        clasificacion=new Clasificacion();
     }
 
     public ClasificacionBean getClasificacionBean() {
@@ -45,11 +48,39 @@ public class ClasificacionFormBean implements Serializable{
     public void setListaDeClasificaciones(List<Clasificacion> listaDeClasificaciones) {
         this.listaDeClasificaciones = listaDeClasificaciones;
     }
+
+    public Clasificacion getClasificacion() {
+        return clasificacion;
+    }
+
+    public void setClasificacion(Clasificacion clasificacion) {
+        this.clasificacion = clasificacion;
+    }
+
+    public boolean isDialogo() {
+        return dialogo;
+    }
+
+    public void setDialogo(boolean dialogo) {
+        this.dialogo = dialogo;
+    }
+    
         public void listarClasificaciones(){
     this.listaDeClasificaciones= clasificacionBean.listarClasificaciones();
     }
 @PostConstruct
 public void init(){
 listarClasificaciones();
+}
+public void agregarClasificacion(){
+clasificacionBean.agregarClasificacion(clasificacion);
+ocultarDialogo();
+
+}
+public void mostrarDialogo(){
+this.dialogo=true;
+}
+public void ocultarDialogo(){
+this.dialogo=false;
 }
 }

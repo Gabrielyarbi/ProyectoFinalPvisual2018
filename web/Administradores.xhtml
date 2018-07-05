@@ -49,7 +49,7 @@
                         </h:panelGrid>
                     </p:panel>
 
-                     <p:panel header="Datos personales" rendered="#{altaFormBean.dialogo}">
+                     <p:panel  header="Datos personales" rendered="#{altaFormBean.dialogo}" >
                         <h:panelGrid columns="2">
                             <p:outputLabel id="lblnombre" value="Nombre" for="txtnombre"/>
                             <p:inputText id="txtnombre" value="#{altaFormBean.perfilAdmin.nombre}"
@@ -74,12 +74,12 @@
                             <p:outputLabel id="lbltelefono" value="Telefono" for="txttelefono"/>
                             <p:inputNumber id="txttelefono" value="#{altaFormBean.perfilAdmin.telefono}"
                                            required="true" decimalPlaces="0" validatorMessage="Solo se permiten 13 digitos como maximo">
-                                <f:validateLength maximum="13"/>
+                                <f:validateLength maximum="13" minimum="10"/>
                             </p:inputNumber>
                             <p:outputLabel id="lbldni" value="Dni" for="txtdni"/>
                             <p:inputNumber id="txtdni" value="#{altaFormBean.perfilAdmin.dni}"
                                            required="true" decimalPlaces="0" validatorMessage="Solo se permiten 8 digitos" >
-                                <f:validateLength maximum="8"/>
+                                <f:validateLength maximum="8" minimum="8"/>
                             </p:inputNumber>
                             <p:outputLabel id="lblfecha" value="Fecha De Naciemiento" for="txtfecha"/>
 
@@ -88,6 +88,7 @@
 
                             <p:commandButton value="Registrarse" actionListener="#{altaFormBean.agregarPerfilAdmin()}" 
                                              update="msjs,frmPub"/>
+                            
 
                         </h:panelGrid>
                     </p:panel>

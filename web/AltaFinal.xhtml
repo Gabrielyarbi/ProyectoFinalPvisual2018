@@ -52,12 +52,12 @@
                             <p:outputLabel id="lbltelefono" value="Telefono" for="txttelefono"/>
                             <p:inputNumber id="txttelefono" value="#{altaFormBean.perfil.telefono}"
                                            required="true" decimalPlaces="0" validatorMessage="Solo se permiten 13 digitos como maximo">
-                                <f:validateLength maximum="13"/>
+                                <f:validateLength maximum="13" minimum="10"/>
                             </p:inputNumber>
                             <p:outputLabel id="lbldni" value="Dni" for="txtdni"/>
                             <p:inputNumber id="txtdni" value="#{altaFormBean.perfil.dni}"
                                            required="true" decimalPlaces="0" validatorMessage="Solo se permiten 8 digitos" >
-                                <f:validateLength maximum="8"/>
+                                <f:validateLength maximum="8" minimum="8"/>
                             </p:inputNumber>
                             <p:outputLabel id="lblfecha" value="Fecha De Naciemiento" for="txtfecha"/>
 

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -21,8 +22,26 @@
                             </p:column>
                         </p:dataTable>                        
                     </p:panel>
-                    <p:commandButton value="Nueva clasificacion" rendered="#{loginFormBean.renderAdmin}"
+                    <p:commandButton value="Nueva clasificacion" actionListener="#{clasificacionFormBean.mostrarDialogo()}"
+                                     update="dialogo" rendered="#{loginFormBean.renderAdmin}"
                                      />
+                </h:form>
+                 <h:form id="dialogo">
+                    <p:growl id="msj"  sticky="true" showDetail="true"/>
+                    <p:dialog id="dial"  widgetVar="dial" visible="#{clasificacionFormBean.dialogo}" header="Nueva Clasificacion"
+                              footer="Biblioteca San Francisco-Programacion visual 2018" showEffect="explode" hideEffect="explode" modal="true">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel id="lbli" value="Identificador" for="txti"/>
+                            <p:inputNumber id="txti" value="#{clasificacionFormBean.clasificacion.identificador}" decimalPlaces="0" required="true"/>
+                            <p:outputLabel id="lbld" value="descripcion" for="txtd"/>
+                            <p:inputText id="txtd" value="#{clasificacionFormBean.clasificacion.descripcion}" required="true" validatorMessage="Descripcion invalida">
+                            <f:validateRegex pattern="^[a-zA-Z ]+$"/>
+                            </p:inputText>
+                        </h:panelGrid>
+                        <p:commandButton value="Agregar" actionListener="#{clasificacionFormBean.agregarClasificacion()}"
+                                         update="dialogo,msj,frmCla"/>
+                        <p:commandButton value="Cancelar" onclick="PF('dial').hide();"/>
+                    </p:dialog>
                 </h:form>
             </ui:define>
 
