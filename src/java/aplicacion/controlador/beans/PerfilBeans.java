@@ -60,6 +60,10 @@ public class PerfilBeans implements Serializable {
         PerfilDAOImp perfildao = new PerfilDAOImp();
         perfildao.agregar(perfil);
     }
+    public void agregarPerfilAdmin(Perfil perfil) {
+        PerfilDAOImp perfildao = new PerfilDAOImp();
+        perfildao.agregarAdmin(perfil);
+    }
 
     public void modificarPerfil(Perfil perfil) {
         PerfilDAOImp perfildao = new PerfilDAOImp();

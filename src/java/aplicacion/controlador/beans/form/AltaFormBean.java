@@ -10,6 +10,7 @@ import aplicacion.controlador.beans.UsuarioBean;
 import aplicacion.modelo.dominio.Usuario;
 import java.io.Serializable;
 import aplicacion.modelo.dominio.Perfil;
+import java.io.IOException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -30,13 +31,17 @@ public class AltaFormBean implements Serializable {
     private UsuarioBean usuariobeans;
     private Usuario usuariof;
     private Perfil perfil;
-
+    private Usuario usuarioAdmin;
+    private Perfil perfilAdmin;
+    private boolean dialogo=false;
     /**
      * Creates a new instance of AltaFormBean
      */
     public AltaFormBean() {
         perfil = new Perfil();
         usuariof = new Usuario("final", true);
+        perfilAdmin=new Perfil();
+        usuarioAdmin = new Usuario("administrador", true);
     }
 
     public PerfilBeans getPerfilbeans() {
@@ -71,6 +76,30 @@ public class AltaFormBean implements Serializable {
         this.usuariobeans = usuariobeans;
     }
 
+    public Usuario getUsuarioAdmin() {
+        return usuarioAdmin;
+    }
+
+    public void setUsuarioAdmin(Usuario usuarioAdmin) {
+        this.usuarioAdmin = usuarioAdmin;
+    }
+
+    public Perfil getPerfilAdmin() {
+        return perfilAdmin;
+    }
+
+    public void setPerfilAdmin(Perfil perfilAdmin) {
+        this.perfilAdmin = perfilAdmin;
+    }
+
+    public boolean isDialogo() {
+        return dialogo;
+    }
+
+    public void setDialogo(boolean dialogo) {
+        this.dialogo = dialogo;
+    }
+
     public void agregarPerfilF() {
 
         if (usuariof != null) {
@@ -81,5 +110,28 @@ public class AltaFormBean implements Serializable {
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Faltan datos de usuario", "Faltan datos de usuario");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         }
+    }
+    public void agregarPerfilAdmin() throws IOException{
+     if (usuarioAdmin != null) {
+            perfilAdmin.setUsuario(usuarioAdmin);
+            perfilbeans.agregarPerfilAdmin(perfilAdmin);
+            usuarioAdmin = new Usuario("administrador", true);
+             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Agregado con exito", "Agregado con exito");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+            ocultarDialogo();
+            FacesContext.getCurrentInstance().getExternalContext().redirect("Administradores.xhtml");
+             perfilAdmin=new Perfil();
+        usuarioAdmin = new Usuario("administrador", true);
+        } else {
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Faltan datos de usuario", "Faltan datos de usuario");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        }
+    }
+    public void mostrarDialogo(){
+    this.dialogo=true;
+    }
+    
+    public void ocultarDialogo(){
+    this.dialogo=false;
     }
 }

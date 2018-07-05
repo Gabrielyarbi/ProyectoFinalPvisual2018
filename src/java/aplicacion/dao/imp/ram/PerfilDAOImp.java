@@ -94,5 +94,22 @@ public class PerfilDAOImp implements IPerfilDAO {
     }
     return perfil;
     }
+    public void agregarAdmin(Perfil perfil) {
+           if (perfil != null) {
+                Session session = NewHibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                session.save(perfil);
+               
+                session.getTransaction().commit();
+                session.close();
+
+            } else {
+                FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Faltan datos", "Faltan datos");
+                FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+
+            }
+
+    }
+
 }
 
