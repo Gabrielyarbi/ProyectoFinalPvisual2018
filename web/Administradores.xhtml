@@ -10,6 +10,7 @@
         <ui:composition template="./Estructura/MasterTemplate.xhtml">
             <ui:define name="content">
                 <h:form id="frmPub">
+                     <p:growl id="msjs"/>
                     <p:panel >
                         <p:dataTable id="tblp" var="usuario" value="#{usuarioFormBean.usuariosAdministradores}">
                             <f:facet name="header">
@@ -29,6 +30,66 @@
                                                  actionListener="#{usuarioFormBean.seleccionarUsuario(usuario)}" update="frmdialogo,frmPub"/>
                             </p:column>
                         </p:dataTable>
+                    </p:panel>
+                     <p:commandButton value="Nuevo Administrador" actionListener="#{altaFormBean.mostrarDialogo()}" 
+                                      update="frmPub"/>
+                     <p:panel header="Datos Del usuario" rendered="#{altaFormBean.dialogo}">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel id="lblnombreU" value="Nombre De Usuario" for="txtnombreU"/>
+                            <p:inputText id="txtnombreU" value="#{altaFormBean.usuarioAdmin.nombreUsuario}" 
+                                         required="true" validatorMessage="Nombre de usuario invalido solo se permite letras y numeros">
+                                <f:validateRegex  pattern="^[a-zA-Z0-9 ]+$"/>
+                            </p:inputText>
+                            <p:outputLabel id="lblcontra" value="Contraseña" for="txtcontra"/>
+                            <p:password id="txtcontra" value="#{altaFormBean.usuarioAdmin.password}"
+                                        required="true" validatorMessage="No coincide la contraseña" maxlength="12"
+                                        match="txtpsw2" feedback="true"/>
+                            <p:outputLabel id="lblcontra2" value="Contraseña" for="txtpsw2"/>
+                            <p:password id="txtpsw2" required="true" />
+                        </h:panelGrid>
+                    </p:panel>
+
+                     <p:panel header="Datos personales" rendered="#{altaFormBean.dialogo}">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel id="lblnombre" value="Nombre" for="txtnombre"/>
+                            <p:inputText id="txtnombre" value="#{altaFormBean.perfilAdmin.nombre}"
+                                         required="true"  maxlength="15" validatorMessage="Nombre invalido">
+                                <f:validateRegex pattern="^[a-zA-Z ]+$"/>
+                            </p:inputText>
+                            <p:outputLabel id="lblapellido" value="Apellido" for="txtapellido"/>
+                            <p:inputText id="txtapellido" value="#{altaFormBean.perfilAdmin.apellido}" 
+                                         required="true" maxlength="15" validatorMessage="Apellido invalido">
+                                <f:validateRegex pattern="^[a-zA-Z ]+$"/>
+                            </p:inputText>
+                            <p:outputLabel id="lbldomicilio" value="Domicilio" for="txtdomicilio"/>
+                            <p:inputText id="txtdomicilio" value="#{altaFormBean.perfilAdmin.direccion}" 
+                                         required="true" validatorMessage="Domicilio invalido">
+                                <f:validateRegex pattern="^[a-zA-Z0-9 ]+$"/>
+                            </p:inputText>
+                            <p:outputLabel id="lblemail" value="Email" for="txtemail"/>
+                            <p:inputText id="txtemail" value="#{altaFormBean.perfilAdmin.email}"
+                                         required="true" validatorMessage="Correo invalido">
+                                <f:validateRegex  pattern="[--_a-z]+@[a-zA-Z]+.com"/> 
+                            </p:inputText>
+                            <p:outputLabel id="lbltelefono" value="Telefono" for="txttelefono"/>
+                            <p:inputNumber id="txttelefono" value="#{altaFormBean.perfilAdmin.telefono}"
+                                           required="true" decimalPlaces="0" validatorMessage="Solo se permiten 13 digitos como maximo">
+                                <f:validateLength maximum="13"/>
+                            </p:inputNumber>
+                            <p:outputLabel id="lbldni" value="Dni" for="txtdni"/>
+                            <p:inputNumber id="txtdni" value="#{altaFormBean.perfilAdmin.dni}"
+                                           required="true" decimalPlaces="0" validatorMessage="Solo se permiten 8 digitos" >
+                                <f:validateLength maximum="8"/>
+                            </p:inputNumber>
+                            <p:outputLabel id="lblfecha" value="Fecha De Naciemiento" for="txtfecha"/>
+
+                            <p:calendar id="txtfecha" value="#{altaFormBean.perfilAdmin.fechaNac}" pattern="dd-MM-yyyy" mask="true" required="true" 
+                                        locale="es"/>
+
+                            <p:commandButton value="Registrarse" actionListener="#{altaFormBean.agregarPerfilAdmin()}" 
+                                             update="msjs,frmPub"/>
+
+                        </h:panelGrid>
                     </p:panel>
                 </h:form>
                 <h:form id="frmdialogo">
