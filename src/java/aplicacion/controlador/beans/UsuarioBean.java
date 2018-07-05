@@ -12,7 +12,6 @@ import aplicacion.modelo.dominio.Usuario;
 import aplicacion.dao.imp.ram.UsuarioDAOImp;
 import aplicacion.modelo.util.PaginaUtil;
 import java.io.Serializable;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import aplicacion.modelo.dominio.Perfil;
 import java.io.IOException;
@@ -48,23 +47,21 @@ public class UsuarioBean implements Serializable {
 
     public Usuario validarUsuario(String nombreUsuario, String password) {
         UsuarioDAOImp usuarioDAOImp = new UsuarioDAOImp();
-
         return usuarioDAOImp.login(nombreUsuario, password);
     }
 
-   
-      public Perfil validarPerfil(){
-          Usuario usu =(Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usu");
-      
-     PerfilDAOImp perDao=new PerfilDAOImp(); 
-     return perDao.loginP(usu); 
- }
-     public void agregarUsuario(Usuario usuario){
-         UsuarioDAOImp usuDao=new UsuarioDAOImp();
-         usuDao.add(usuario);
-     }
+    public Perfil validarPerfil() {
+        Usuario usu = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usu");
 
-   
+        PerfilDAOImp perDao = new PerfilDAOImp();
+        return perDao.loginP(usu);
+    }
+
+    public void agregarUsuario(Usuario usuario) {
+        UsuarioDAOImp usuDao = new UsuarioDAOImp();
+        usuDao.add(usuario);
+    }
+
     /**
      * Guarda el usuario como nulo (deslogueado) y redirecciona a la pagina de
      * inicio
@@ -74,30 +71,35 @@ public class UsuarioBean implements Serializable {
         p.cerrarSesion();
     }
 
-    public boolean renderizarF(){
-return p.renderizarPaginaFinal();
-    }
-    public boolean renderizarA(){
-return p.renderizarPaginaAdmin();
-    }
-    public boolean renderizarS(){
-return p.renderizarPaginaSuper();
+    public boolean renderizarF() {
+        return p.renderizarPaginaFinal();
     }
 
-  public Usuario validarSesion(){
-  Usuario usu=(Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usu");
-  return usu;
-  }
-public List<Usuario> obtenerUsuarios(){
-UsuarioDAOImp usuDao =new UsuarioDAOImp();
-return usuDao.listarUsuarios();
-}
-public List<Usuario> obtenerAdministradores(){
-UsuarioDAOImp usuDao =new UsuarioDAOImp();
-return usuDao.listarAdministradores();
-}
-public void modificarUsuario(Usuario us){
-UsuarioDAOImp usuDao =new UsuarioDAOImp();
-usuDao.modificarUsuario(us);
-}
+    public boolean renderizarA() {
+        return p.renderizarPaginaAdmin();
+    }
+
+    public boolean renderizarS() {
+        return p.renderizarPaginaSuper();
+    }
+
+    public Usuario validarSesion() {
+        Usuario usu = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usu");
+        return usu;
+    }
+
+    public List<Usuario> obtenerUsuarios() {
+        UsuarioDAOImp usuDao = new UsuarioDAOImp();
+        return usuDao.listarUsuarios();
+    }
+
+    public List<Usuario> obtenerAdministradores() {
+        UsuarioDAOImp usuDao = new UsuarioDAOImp();
+        return usuDao.listarAdministradores();
+    }
+
+    public void modificarUsuario(Usuario us) {
+        UsuarioDAOImp usuDao = new UsuarioDAOImp();
+        usuDao.modificarUsuario(us);
+    }
 }

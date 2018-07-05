@@ -35,7 +35,7 @@ public class UsuarioDAOImp implements IUsuarioDAO, Serializable {
         criteria.add(Restrictions.eq("estado", true));
         if (!criteria.list().isEmpty()) {
             usu = (Usuario) criteria.list().get(0);
-                
+
         }
         session.close();
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usu", usu);

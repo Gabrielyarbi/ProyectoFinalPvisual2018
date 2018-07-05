@@ -14,7 +14,7 @@
                         <p:dataTable id="tblp" var="usuario" value="#{usuarioFormBean.usuariosAdministradores}">
                             <f:facet name="header">
                                 Usuarios Administrativo
-                                <p:commandButton value="Imprimir" icon="ui-icon-print"></p:commandButton>
+                                <p:commandButton value="Imprimir" icon="ui-icon-print" ajax="false" actionListener="#{usuarioFormBean.exportarUsuarioAdminPdf(actionEvent)}"></p:commandButton>
                             </f:facet>
                             <p:column headerText="Nombre">  
                                 <p:outputLabel value="#{usuario.nombreUsuario}" />

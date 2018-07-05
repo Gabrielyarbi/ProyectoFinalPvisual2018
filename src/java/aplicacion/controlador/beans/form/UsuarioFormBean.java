@@ -126,11 +126,31 @@ public class UsuarioFormBean implements Serializable {
         Map<String, Object> parametros = new HashMap<String, Object>();
 //puedo pasar parametros al report, siempre que el diseño lo soporte
 //parametros.put("usuario", "pepito");
-        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/repoUsuFinal.jasper"));
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/repoUsuFin.jasper"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, new JRBeanCollectionDataSource(this.getUsuarios()));
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         response.setContentType("application/pdf");
         response.addHeader("Content-disposition", "attachment; filename=UsuariosFinales.pdf");
+        ServletOutputStream stream = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+//exportamos a un archivo en disco
+//JasperExportManager.exportReportToPdfFile(jasperPrint, "e:/reportePrendas.pdf");
+//mostrar en visor jasper
+//JasperViewer.viewReport(jasperPrint,false);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+
+    public void exportarUsuarioAdminPdf(ActionEvent actionEvent) throws JRException, IOException {
+        Map<String, Object> parametros = new HashMap<String, Object>();
+//puedo pasar parametros al report, siempre que el diseño lo soporte
+//parametros.put("usuario", "pepito");
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/repoUsuAdm.jasper"));
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, new JRBeanCollectionDataSource(this.getUsuariosAdministradores()));
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.setContentType("application/pdf");
+        response.addHeader("Content-disposition", "attachment; filename=UsuariosAdministradores.pdf");
         ServletOutputStream stream = response.getOutputStream();
         JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
 //exportamos a un archivo en disco

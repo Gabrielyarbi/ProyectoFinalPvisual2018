@@ -12,16 +12,16 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="112" y="26" width="443" height="53" uuid="190159e4-3ca3-4179-bde0-04bc59642727"/>
+				<reportElement x="81" y="0" width="474" height="79" uuid="190159e4-3ca3-4179-bde0-04bc59642727"/>
 				<textElement>
-					<font fontName="Arial" size="30"/>
+					<font fontName="Arial" size="42" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Convento]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="213" y="59" width="185" height="20" uuid="c411f6a8-1df5-4a10-a998-0d3a5bf970b0"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="14"/>
+					<font fontName="Arial" size="16" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Usuarios]]></text>
 			</staticText>
@@ -29,48 +29,65 @@
 				<reportElement x="455" y="59" width="100" height="20" uuid="1aa1cca6-0885-495e-935e-250fdd40199d"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="78905d8f-4c0c-450d-95bb-4da7e58b9b6c"/>
+			</line>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="13" splitType="Stretch"/>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="12" width="555" height="1" uuid="8b48eaad-684d-4e52-86df-dadea763ca3d"/>
+			</line>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="25" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="185" height="20" backcolor="#00CCCC" uuid="41fad808-e2c7-4cc5-91b0-e3353d41ed20"/>
+				<reportElement mode="Opaque" x="0" y="0" width="185" height="20" forecolor="#000000" backcolor="#CCCCCC" uuid="41fad808-e2c7-4cc5-91b0-e3353d41ed20"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[nombreUsuario]]></text>
+				<text><![CDATA[Nombre Usuario]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="185" y="0" width="185" height="20" backcolor="#00CCCC" uuid="e8b279ab-9b51-4256-8b38-88eba6b723c5"/>
+				<reportElement mode="Opaque" x="185" y="0" width="185" height="20" forecolor="#000000" backcolor="#CCCCCC" uuid="e8b279ab-9b51-4256-8b38-88eba6b723c5"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[tipoUsuario]]></text>
+				<text><![CDATA[Tipo Usuario]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="370" y="0" width="185" height="20" backcolor="#00CCCC" uuid="14f51cfd-4295-47cd-884a-416914d709d9"/>
+				<reportElement mode="Opaque" x="370" y="0" width="185" height="20" forecolor="#000000" backcolor="#CCCCCC" uuid="14f51cfd-4295-47cd-884a-416914d709d9"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[estado]]></text>
+				<text><![CDATA[Estado]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="58899ab1-782c-4f1d-a1e0-ba7ea9a2d10c"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="25" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="185" height="20" uuid="5e6eb486-f2f5-42c9-a197-d03906522672"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{nombreUsuario}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="185" y="0" width="185" height="20" uuid="2883b96a-4c5b-4b92-9889-49d2c749675b"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{tipoUsuario}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="370" y="0" width="185" height="20" uuid="2340f024-ac8b-4bbe-a673-5becb3263678"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="20" splitType="Stretch"/>
+		<band height="233" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="676f4c7a-affc-42e6-b3d2-1e11f7f4946b"/>
+			</line>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="20" splitType="Stretch">
